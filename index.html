@@ -72,7 +72,7 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 
-                <!-- Card: Data --><div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center md:text-left">
+                <!-- Card: Data (Atualizado) --><div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center md:text-left">
                     <div class="flex justify-center md:justify-start mb-4">
                         <!-- Ícone: Calendário --><svg class="w-12 h-12 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25m10.5-2.25v2.25m-10.5 0L6.75 21l10.5-15.75m-10.5 0H21M3 7.5h18M3 12h18m-3 4.5h.008v.008H18V16.5m-3 0h.008v.008H15V16.5m-3 0h.008v.008H12V16.5m-3 0h.008v.008H9V16.5m-3 0h.008v.008H6V16.5m-3 0h.008v.008H3V16.5m0 0h.008v.008H3V16.5M3 7.5v11.25c0 .621.504 1.125 1.125 1.125h16.5c.621 0 1.125-.504 1.125-1.125V7.5m-18 0v-3C3 3.903 3.903 3 5.25 3h13.5C19.097 3 20 3.903 20 5.25v2.25" />
@@ -82,7 +82,7 @@
                     <p class="text-gray-600">30 de Outubro de 2025</p>
                 </div>
 
-                <!-- Card: Local --><div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center md:text-left">
+                <!-- Card: Local (Atualizado) --><div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center md:text-left">
                     <div class="flex justify-center md:justify-start mb-4">
                         <!-- Ícone: Localização --><svg class="w-12 h-12 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -100,17 +100,19 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Inscrições</h3>
+                    <!-- TEXTO ALTERADO -->
                     <p class="text-gray-600">Gratuitas | Até 30 de Outubro</p>
                     <p class="text-gray-600 font-semibold mt-1">Equipes de 3 a 6 membros</p>
                 </div>
 
-                <!-- Card: Prêmios (Alexa Adicionada) --><div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center md:text-left">
+                <!-- Card: Prêmios (Atualizado) --><div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center md:text-left">
                     <div class="flex justify-center md:justify-start mb-4">
                         <!-- Ícone: Prêmios --><svg class="w-12 h-12 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-6.75c-.621 0-1.125.504-1.125 1.125V18.75m9 0v-3.375M9 18.75v-3.375m0 0a1.125 1.125 0 011.125-1.125h2.25a1.125 1.125 0 011.125 1.125V18.75m-4.5 0v-3.375m0 0h4.5m0 0v-3.375a1.125 1.125 0 011.125-1.125h2.25a1.125 1.125 0 011.125 1.125V15m-4.5 0v-3.375m0 0h4.5" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Prêmios</h3>
+                    <!-- TEXTO ALTERADO -->
                     <p class="text-gray-600">Prêmios Incríveis</p>
                 </div>
             </div>
@@ -179,7 +181,7 @@
                     </div>
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3">Networking</h3>
                     <p class="text-gray-600 text-base">
-                        Conecte-se com estudantes, professores e professionals do mercado de tecnologia e marketing.
+                        Conecte-se com estudantes, professores e profissionais do mercado de tecnologia e marketing.
                     </p>
                 </div>
 
@@ -313,24 +315,19 @@
     </footer>
 
 
-    <!-- Scripts do Firebase -->
+    <!-- **** PASSO 1: Importar o ficheiro de configuração PRIMEIRO **** -->
+    <!-- Este ficheiro (que contém as chaves) DEVE estar no seu .gitignore -->
+    <script src="firebase-config.js"></script>
+
+    <!-- **** PASSO 2: O script principal agora usa a configuração importada **** -->
     <script type="module">
         // Importações necessárias do Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, addDoc, collection, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // 1. Configuração e Inicialização do Firebase
-        // Colamos sua configuração do Firebase diretamente aqui.
-        const firebaseConfig = {
-          apiKey: "AIzaSyDUQlo_DShKIZ8PxEo8ySJoSa-3kqi-SKs",
-          authDomain: "hackathon---uniceplac.firebaseapp.com",
-          projectId: "hackathon---uniceplac",
-          storageBucket: "hackathon---uniceplac.firebasestorage.app",
-          messagingSenderId: "866463921727",
-          appId: "1:866463921727:web:c84ab1ca47735f71122a8a",
-          measurementId: "G-1RXJD45NJX"
-        };
+        // A variável 'firebaseConfig' é carregada do ficheiro 'firebase-config.js'
         
         // O appId para o caminho do Firestore deve ser o ID do seu Projeto.
         const appId = "hackathon---uniceplac"; 
@@ -338,28 +335,42 @@
         let app, auth, db;
         let userId;
 
-        // Tenta inicializar e autenticar no Firebase
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            setLogLevel('Debug'); // Habilita logs para depuração
+        const messageEl = document.getElementById('formMessage'); // Definido aqui
 
-            // 2. Autenticação (Necessária para regras de segurança)
-            // Autentica o usuário anonimamente para permitir a escrita no banco
-            await signInAnonymously(auth);
-            
-            userId = auth.currentUser?.uid || crypto.randomUUID(); // Pega o ID do usuário
+        // Verifica se a configuração do Firebase foi carregada
+        if (typeof firebaseConfig !== 'undefined' && Object.keys(firebaseConfig).length > 0) {
+            try {
+                // Usa a variável 'firebaseConfig' que veio do ficheiro externo
+                app = initializeApp(firebaseConfig); 
+                auth = getAuth(app);
+                db = getFirestore(app);
+                setLogLevel('Debug'); // Habilita logs para depuração
 
-        } catch (error) {
-            console.error("Erro ao inicializar ou autenticar no Firebase:", error);
-            // Define um ID de fallback caso a autenticação falhe
-            userId = crypto.randomUUID();
+                // 2. Autenticação (Necessária para regras de segurança)
+                // Autentica o usuário anonimamente para permitir a escrita no banco
+                await signInAnonymously(auth);
+                
+                userId = auth.currentUser?.uid || crypto.randomUUID(); // Pega o ID do usuário
+
+            } catch (error) {
+                console.error("Erro ao inicializar ou autenticar no Firebase:", error);
+                userId = crypto.randomUUID();
+                if (messageEl) {
+                    messageEl.textContent = "Erro grave ao conectar. Verifique o console.";
+                    messageEl.className = 'text-red-500 font-semibold mt-4';
+                }
+            }
+        } else {
+            // Este erro agora aparece se 'firebase-config.js' falhar ao carregar
+            console.warn("Configuração do Firebase (firebase-config.js) não encontrada.");
+            if (messageEl) {
+                messageEl.textContent = "Erro: Arquivo de configuração (firebase-config.js) não encontrado.";
+                messageEl.className = 'text-red-500 font-semibold mt-4';
+            }
         }
 
         // 3. Lógica de Submissão do Formulário
         const registrationForm = document.getElementById('registrationForm');
-        const messageEl = document.getElementById('formMessage');
         const submitButton = registrationForm.querySelector('button[type="submit"]');
 
         registrationForm.addEventListener('submit', async (e) => {
@@ -374,8 +385,8 @@
 
             // Pega os valores do formulário
             const nomeEquipe = document.getElementById('nome-equipe').value;
-            const desafioEquipe = document.getElementById('desafio-equipe').value; // NOVO CAMPO
-            const ideiaEquipe = document.getElementById('ideia-equipe').value; // NOVO CAMPO
+            const desafioEquipe = document.getElementById('desafio-equipe').value; 
+            const ideiaEquipe = document.getElementById('ideia-equipe').value; 
             
             const nomeLider = document.getElementById('nome-lider').value;
             const emailLider = document.getElementById('email-lider').value;
@@ -400,28 +411,26 @@
                 integrante4,
                 integrante5,
                 integrante6
-            ].filter(Boolean); // .filter(Boolean) remove entradas vazias (ex: se integrante 4, 5, 6 não forem preenchidos)
+            ].filter(Boolean); // .filter(Boolean) remove entradas vazias
 
 
             try {
                 // 4. Salva os dados no Firestore
-                // Caminho da coleção: /artifacts/{appId}/public/data/inscricoes
-                // Usamos 'public/data' para que os organizadores possam ver os dados.
                 const publicDataCollection = collection(db, 'artifacts', appId, 'public', 'data', 'inscricoes');
                 
                 const docRef = await addDoc(publicDataCollection, {
                     nomeEquipe: nomeEquipe,
-                    desafio: desafioEquipe, // DADO ATUALIZADO
-                    ideia: ideiaEquipe,     // DADO ATUALIZADO
+                    desafio: desafioEquipe, 
+                    ideia: ideiaEquipe,     
                     lider: {
                         nome: nomeLider,
                         email: emailLider,
                         curso: cursoLider
                     },
-                    integrantes: listaIntegrantes, // Salva o array de nomes
+                    integrantes: listaIntegrantes, 
                     numeroDeIntegrantes: listaIntegrantes.length,
-                    inscritoEm: new Date(), // Data e hora da inscrição
-                    userId: userId // ID do usuário que se inscreveu
+                    inscritoEm: new Date(), 
+                    userId: userId 
                 });
 
                 // Feedback de Sucesso
