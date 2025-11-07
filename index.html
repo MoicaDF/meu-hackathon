@@ -61,9 +61,20 @@
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10">
                     Um evento focado em incentivar a inovação, explorar novas tecnologias e fortalecer o trabalho em equipe. Junte-se a nós para criar soluções que farão a diferença.
                 </p>
-                <!-- Botão de Inscrição (Hero) --><a href="#inscricao-form" id="inscricao" class="inline-block bg-emerald-600 text-white font-bold py-4 px-10 text-lg rounded-lg shadow-xl hover:bg-emerald-700 transition duration-300 transform hover:-translate-y-1">
-                    Garanta sua Vaga Agora
-                </a>
+                
+                <!-- Botões de Ação -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <!-- Botão de Inscrição (Hero) -->
+                    <a href="#inscricao-form" id="inscricao" class="inline-block w-full sm:w-auto bg-emerald-600 text-white font-bold py-4 px-10 text-lg rounded-lg shadow-xl hover:bg-emerald-700 transition duration-300 transform hover:-translate-y-1">
+                        Garanta sua Vaga Agora
+                    </a>
+                    
+                    <!-- NOVO BOTÃO: Regulamento -->
+                    <a href="docs/REGULAMENTO_HACKATHON_2025.pdf.pdf" target="_blank" class="inline-block w-full sm:w-auto bg-transparent text-emerald-700 font-semibold py-4 px-10 text-lg rounded-lg border-2 border-emerald-600 hover:bg-emerald-50 transition duration-300">
+                        Consultar Regulamento
+                    </a>
+                </div>
+
             </div>
         </main>
     </div>
@@ -143,7 +154,7 @@
                         2. Meu Bairro Digital
                     </h3>
                     <p class="text-gray-700 mb-4">
-                        <strong class="text-gray-800">Descrição:</strong> Use alguma API pública de dados abertos (como o dados.gov.br) para criar uma solução que melhore a vida urbana.
+                        <strong class="text-gray-800">Descrição:</strong> Use alguma API pública de dados abertos (como o dados.gov.br) para criar uma solution que melhore a vida urbana.
                     </p>
                     <p class="text-gray-700">
                         <strong class="text-gray-800">Objetivo:</strong> Transformar dados públicos em informações úteis para o cidadão (Ex: Painel de saúde, App de feedback, Visualizador de estatísticas).
@@ -200,7 +211,7 @@
                 <!-- Benefício 3: Reconhecimento --><div class="flex flex-col items-center">
                     <div class="bg-emerald-100 text-emerald-700 rounded-full p-5 mb-6">
                         <!-- Ícone: Reconhecimento --><svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-6.75c-.621 0-1.125.504-1.125 1.125V18.75m9 0v-3.375M9 18.75v-3.375m0 0a1.125 1.125 0 011.125-1.125h2.25a1.125 1.125 0 011.125 1.125V18.75m-4.5 0v-3.375m0 0h4.5m0 0v-3.375a1.125 1.125 0 011.125-1.125h2.25a1.125 1.125 0 011.125 1.125V15m-4.5 0v-3.375m0 0h4.5" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-6.75c-.621 0-1.125.504-1.125 1.125V18.75m9 0v-3.375M9 18.75v-3.375m0 0a1.125 1.125 0 011.125-1.125h2.25a1.125 1.125 0 011.125 1.125V18.75m-4.5 0v-3.375m0 0h4.5m0 0v-3.375a1.125 1.125 0 011.125-1.125h2.25a1.125 1.125 0 011.125 1.125V15m-4.5 0v-3.375m0 0h4.se" />
                         </svg>
                     </div>
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3">Reconhecimento</h3>
@@ -260,6 +271,11 @@
                     <!-- Campo: Curso Líder --><div>
                         <label for="curso-lider" class="block text-sm font-semibold text-gray-700 mb-2">Seu Curso (Líder/Representante)</label>
                         <input type="text" id="curso-lider" name="curso-lider" required placeholder="Ex: Ciência de Dados e Mkt Digital" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+
+                    <!-- NOVO CAMPO: Telefone Líder --><div>
+                        <label for="telefone-lider" class="block text-sm font-semibold text-gray-700 mb-2">Seu Telefone (WhatsApp)</label>
+                        <input type="tel" id="telefone-lider" name="telefone-lider" required placeholder="(XX) XXXXX-XXXX" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     </div>
 
                     <hr class="my-4 border-t border-gray-200">
@@ -337,16 +353,43 @@
 
         const messageEl = document.getElementById('formMessage'); // Definido aqui
 
-        // Verifica se a configuração do Firebase foi carregada
-        if (typeof firebaseConfig !== 'undefined' && Object.keys(firebaseConfig).length > 0) {
+        // **** ATUALIZAÇÃO IMPORTANTE: Lógica Híbrida de Configuração ****
+        // Esta lógica permite que o site funcione tanto no servidor (Firebase Hosting)
+        // quanto localmente (carregando o firebase-config.js)
+
+        let firebaseConfigToUse;
+
+        if (typeof __firebase_config !== 'undefined') {
+            // MODO ONLINE (Firebase Hosting)
+            // As variáveis __firebase_config e __app_id são injetadas automaticamente.
+            console.log("Modo Online: Usando configuração injetada.");
+            firebaseConfigToUse = JSON.parse(__firebase_config);
+        
+        } else if (typeof firebaseConfig !== 'undefined') {
+            // MODO LOCAL (Testando)
+            // A variável 'firebaseConfig' foi carregada do ficheiro 'firebase-config.js'.
+            console.log("Modo Local: Usando firebase-config.js.");
+            firebaseConfigToUse = firebaseConfig;
+        
+        } else {
+            // MODO ERRO
+            // Nenhuma configuração foi encontrada.
+            console.error("Erro Fatal: Configuração do Firebase não encontrada.");
+            if (messageEl) {
+                messageEl.textContent = "Erro: Arquivo de configuração (firebase-config.js) não encontrado. O site não pode conectar ao banco de dados.";
+                messageEl.className = 'text-red-500 font-semibold mt-4';
+            }
+        }
+
+        // 3. Inicialização e Autenticação
+        // Só executa se uma configuração válida foi encontrada
+        if (firebaseConfigToUse) {
             try {
-                // Usa a variável 'firebaseConfig' que veio do ficheiro externo
-                app = initializeApp(firebaseConfig); 
+                app = initializeApp(firebaseConfigToUse); 
                 auth = getAuth(app);
                 db = getFirestore(app);
                 setLogLevel('Debug'); // Habilita logs para depuração
 
-                // 2. Autenticação (Necessária para regras de segurança)
                 // Autentica o usuário anonimamente para permitir a escrita no banco
                 await signInAnonymously(auth);
                 
@@ -360,16 +403,9 @@
                     messageEl.className = 'text-red-500 font-semibold mt-4';
                 }
             }
-        } else {
-            // Este erro agora aparece se 'firebase-config.js' falhar ao carregar
-            console.warn("Configuração do Firebase (firebase-config.js) não encontrada.");
-            if (messageEl) {
-                messageEl.textContent = "Erro: Arquivo de configuração (firebase-config.js) não encontrado.";
-                messageEl.className = 'text-red-500 font-semibold mt-4';
-            }
         }
-
-        // 3. Lógica de Submissão do Formulário
+        
+        // 4. Lógica de Submissão do Formulário
         const registrationForm = document.getElementById('registrationForm');
         const submitButton = registrationForm.querySelector('button[type="submit"]');
 
@@ -391,6 +427,7 @@
             const nomeLider = document.getElementById('nome-lider').value;
             const emailLider = document.getElementById('email-lider').value;
             const cursoLider = document.getElementById('curso-lider').value;
+            const telefoneLider = document.getElementById('telefone-lider').value; // NOVO CAMPO
             
             const integrante2 = document.getElementById('nome-integrante2').value;
             const integrante3 = document.getElementById('nome-integrante3').value;
@@ -415,7 +452,7 @@
 
 
             try {
-                // 4. Salva os dados no Firestore
+                // 5. Salva os dados no Firestore
                 const publicDataCollection = collection(db, 'artifacts', appId, 'public', 'data', 'inscricoes');
                 
                 const docRef = await addDoc(publicDataCollection, {
@@ -425,7 +462,8 @@
                     lider: {
                         nome: nomeLider,
                         email: emailLider,
-                        curso: cursoLider
+                        curso: cursoLider,
+                        telefone: telefoneLider // NOVO CAMPO
                     },
                     integrantes: listaIntegrantes, 
                     numeroDeIntegrantes: listaIntegrantes.length,

@@ -9,6 +9,9 @@ firebase-debug.*.log*
 
 # Firebase cache
 .firebase/
+# O ficheiro de configuração com as chaves NUNCA deve ir para o GitHub.
+
+firebase-config.js
 
 # Firebase config
 
